@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #1b2b4f, #060b18);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    text-align: center;
+    width: 90%;
+    max-width: 1000px;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .subtitle {
+    margin-top: 10px;
+    opacity: 0.8;
+    font-size: 1.1rem;
+  }
+  
+  .grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+  }
+  
+  .card {
+    text-decoration: none;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+  
+  .card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+  
+  .card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+  .colour-1,
+.colour-2,
+.colour-3 {
+  mix-blend-mode: screen;
+}
+body {background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);}
