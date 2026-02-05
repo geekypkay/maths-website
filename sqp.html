@@ -365,6 +365,40 @@ iframe {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
+#pdf-viewer {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background: #2b2b2b;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.pdf-page {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+  background: #fff;
+  border-radius: 8px;
+}
+.container {
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+.pdf-section {
+  height: 100%;
+  overflow: hidden;
+}
+
+#pdf-viewer {
+  -webkit-overflow-scrolling: touch;
+}
 
   </style>
 </head>
@@ -418,7 +452,8 @@ iframe {
 
   <!-- PDF SECTION -->
   <div class="pdf-section">
-    <iframe src="sqp_paper.pdf"></iframe>
+    <div id="pdf-viewer"></div>
+
   </div>
 
   <!-- HINT PANEL -->
@@ -1378,6 +1413,46 @@ function closeHint(q) {
     
 
 
+<!-- PDF.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+</script>
+
+<!-- PDF render logic (THIS IS STEP 4 YOU ASKED ABOUT) -->
+<script>
+  const url = "sqp_paper.pdf";
+  const container = document.getElementById("pdf-viewer");
+
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+      pdf.getPage(pageNum).then(page => {
+        const scale = 1.3;
+        const viewport = page.getViewport({ scale });
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "pdf-page";
+        wrapper.appendChild(canvas);
+        container.appendChild(wrapper);
+
+        page.render({
+          canvasContext: ctx,
+          viewport: viewport
+        });
+      });
+    }
+  });
+</script>
+
+</body>
 
 </body>
 </html>
