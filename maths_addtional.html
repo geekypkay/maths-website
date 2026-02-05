@@ -1167,34 +1167,46 @@ function toggleSolution(q) {
 
 <!-- PDF render logic (THIS IS STEP 4 YOU ASKED ABOUT) -->
 <script>
-  const url = "imp_maths.pdf";
-  const container = document.getElementById("pdf-viewer");
-
-  pdfjsLib.getDocument(url).promise.then(pdf => {
-    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-      pdf.getPage(pageNum).then(page => {
-        const scale = 1.3;
-        const viewport = page.getViewport({ scale });
-
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "pdf-page";
-        wrapper.appendChild(canvas);
-        container.appendChild(wrapper);
-
-        page.render({
-          canvasContext: ctx,
-          viewport: viewport
+    const url = "imp_maths.pdf";
+    const container = document.getElementById("pdf-viewer");
+  
+    pdfjsLib.getDocument(url).promise.then(pdf => {
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        pdf.getPage(pageNum).then(page => {
+  
+          // Adaptive scale (better on iOS)
+          const baseScale = window.innerWidth < 900 ? 1.6 : 1.3;
+          const viewport = page.getViewport({ scale: baseScale });
+  
+          const dpr = window.devicePixelRatio || 1;
+  
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+  
+          // High-resolution backing store
+          canvas.width = viewport.width * dpr;
+          canvas.height = viewport.height * dpr;
+  
+          // Visual size (normal)
+          canvas.style.width = viewport.width + "px";
+          canvas.style.height = viewport.height + "px";
+  
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  
+          const wrapper = document.createElement("div");
+          wrapper.className = "pdf-page";
+          wrapper.appendChild(canvas);
+          container.appendChild(wrapper);
+  
+          page.render({
+            canvasContext: ctx,
+            viewport: viewport
+          });
         });
-      });
-    }
-  });
-</script>
+      }
+    });
+  </script>
+  
 
 </body>
 
