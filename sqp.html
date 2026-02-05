@@ -302,6 +302,68 @@ body.light .header-btn{
   
 }
 
+
+
+
+
+/* iOS iframe scrolling fix */
+.pdf-section {
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+}
+
+iframe {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+@supports (-webkit-touch-callout: none) {
+  /* iOS only */
+  .pdf-section {
+    height: auto;
+    max-height: calc(100vh - 64px);
+  }
+
+  iframe {
+    height: calc(100vh - 96px);
+  }
+}
+.pdf-section {
+  touch-action: pan-y;
+}
+
+.hint-panel {
+  touch-action: pan-y;
+}
+/* ================================
+   SCROLLBAR FIX (FINAL)
+   Removes the useless middle scrollbar
+================================ */
+
+/* Parent must NEVER scroll */
+.container {
+  overflow: hidden;
+}
+
+/* PDF side */
+.pdf-section {
+  overflow: hidden;
+}
+
+.pdf-section iframe {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* iPad smooth scroll */
+}
+
+/* Hint panel scrolls independently */
+.hint-panel {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
   </style>
 </head>
 
@@ -323,7 +385,7 @@ body.light .header-btn{
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <button class="header-btn home-btn" onclick="window.location.href='index.html'" style="
   float:none;
   margin-right:8px;
