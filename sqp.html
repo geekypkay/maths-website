@@ -268,7 +268,17 @@ body.light header {
   color: #2a2520;
   border-bottom: 1px solid rgba(120, 90, 60, 0.25);
 }
-
+/** CUSTOM
+/* DARK MODE – add breathing space like light mode */
+body.light .hint-panel {
+  margin: 16px 16px 16px 0; /* top right bottom left */
+  border-radius: 18px;
+}
+body.light .hint-panel {
+  box-shadow: 
+    0 12px 30px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+}
 
 
 
@@ -400,6 +410,123 @@ canvas {
   -webkit-overflow-scrolling: touch;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.solution-btn.open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.solution-box {
+  display: none;
+  padding: 12px;
+  border-radius: 0 0 14px 14px; /* only bottom rounded */
+  background: rgba(200,155,106,0.22);
+  border-top: none; /* IMPORTANT: removes weird seam */
+}
+
+
+
+
+
+
+
+/**/
+/* FIX: Home button unreadable in light mode */
+header.light .header-btn {
+  background: linear-gradient(
+    180deg,
+    #e7d5bf 0%,
+    #dcc5a8 100%
+  );
+  color: #3a2f27;            /* dark readable text */
+  border: 1px solid rgba(120, 90, 60, 0.35);
+  font-weight: 600;
+}
+
+header.light .header-btn:hover {
+  background: linear-gradient(
+    180deg,
+    #dbc2a0 0%,
+    #cfb28e 100%
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header-btn {
+  float: none;
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+body:not(.light) .header-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+body:not(.light) .header-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transform: translateY(-1px);
+}
+body.light .header-btn {
+  background: rgba(120, 90, 60, 0.15); /* warm beige */
+  color: #3a2f27;                     /* dark readable text */
+}
+
+body.light .header-btn:hover {
+  background: rgba(120, 90, 60, 0.25);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
   </style>
 </head>
 
@@ -422,16 +549,7 @@ canvas {
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <button class="header-btn home-btn" onclick="window.location.href='index.html'" style="
-  float:none;
-  margin-right:8px;
-  padding:6px 12px;
-  border-radius:8px;
-  border:none;
-  cursor:pointer;
-  background:rgba(255,255,255,0.15);
-  color:#fff;
-">
+  <button class="header-btn" onclick="window.location.href='index.html'">
   ⬅ Home
 </button>
   <button id="themeToggle" style="
